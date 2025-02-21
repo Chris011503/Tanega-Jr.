@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Triangle Shapes</title>
+<style>
+body {
+  font-family: monospace; /* Use a monospace font for consistent * spacing */
+}
+.shape {
+  white-space: pre; /* Preserve whitespace for the shape */
+  margin-bottom: 10px; /* Add some spacing between shapes */
+}
+</style>
+</head>
+<body>
+
+<h1>Triangle Shapes</h1>
+
+<div class="shape" id="triangle"></div>
+<div class="shape" id="reverseTriangle"></div>
+<div class="shape" id="diamond"></div>
+
+<script>
+function createTriangle(rows, reverse) {
+  let shape = "";
+  let spaces = reverse ? 0 : rows - 1;
+  let stars = reverse ? rows : 1;
+
+  for (let i = 0; i < rows; i++) {
+    shape += " ".repeat(spaces);
+    shape += "*".repeat(stars);
+    shape += "\n";
+
+    if (reverse) {
+      spaces++;
+      stars -= 2;
+    } else {
+      spaces--;
+      stars += 2;
+    }
+  }
+  return shape;
+}
+
+function createDiamond(rows) {
+  let diamond = "";
+  diamond += createTriangle(rows)
+  diamond += createTriangle(rows - 1, true) //Reverse and one row less
+  return diamond;
+}
+
+document.getElementById("triangle").textContent = createTriangle(5);
+document.getElementById("reverseTriangle").textContent = createTriangle(5, true);
+document.getElementById("diamond").textContent = createDiamond(5);
+
+</script>
+
+</body>
+</html>
